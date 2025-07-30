@@ -554,7 +554,23 @@ Moved styles to CSS for cleaner active link styling.
 ========================================================================================
 
 
+or)
 
+<BrowserRouter>: Wraps your app to enable routing using browser’s history API.
+
+<Routes>: Container for all route definitions.
+
+<Route>: Defines a route with a path and component (element) to render.
+
+<Link> / <NavLink>: Navigation links without page reload; NavLink can style active links.
+
+<Navigate>: Redirects to another route.
+
+useParams(): Hook to read dynamic URL parts like /user/:username.
+
+useSearchParams(): Hook to read and update query parameters like ?category=electronics.
+
+<Outlet>: Placeholder to render child routes for nested routing.
  
 
 
