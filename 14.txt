@@ -1,0 +1,560 @@
+29.07.2025
+
+React Routing
+
+React routing is the technique of defining and handling different URLs (routes) in a single-page React application, allowing it to display different components or pages based on the URL without reloading the entire page.
+
+
+
+
+import {BrowserRouter,  Route ,Routes} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+function App(){
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path ="/home" element={<Home />} />
+        <Route path ="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+function Home(){
+    return(
+        <div>
+<h2>Home component</h2>
+        </div>
+    )
+}
+export default Home;    
+
+function Profile(){
+    return(
+        <div>
+<h2>Profile component  </h2>
+        </div>
+    )
+}
+export default Profile;
+===============
+import {BrowserRouter,  Route ,Routes,Link} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+function App(){
+  return(
+    <BrowserRouter>
+     
+       <Link to="/home">Home</Link>
+       <Link to="/profile">Profile</Link>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+====================
+import {BrowserRouter,  Route ,Routes,Link} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+function App(){
+  return(
+    <BrowserRouter>
+      <NavBar />
+               <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+
+=
+import { Link } from "react-router-dom";
+
+function NavBar() {
+  return (
+    <div>
+      <Link to="/home">Home</Link><br></br>
+      <Link to="/profile">Profile</Link>
+    </div>
+  );
+}
+export default NavBar;
+
+=========================
+function Profile(){
+    return(
+        <div>
+<h2>Profile component  </h2>
+<p>This is the profile component created to learn react routing</p>
+        </div>
+    )
+}
+export default Profile;
+
+import { Link } from "react-router-dom";
+
+function Home(){
+    return(
+        <div>
+<h2>Home component</h2>
+<p>This is the home component.created to learn react routing</p>
+<Link to="/profile">Go to Profile</Link>
+        </div>
+    )
+}
+export default Home;    
+
+import {BrowserRouter,  Route ,Routes,Link} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+function App(){
+  return(
+    <BrowserRouter>
+      <NavBar />
+               <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+=================
+app.jsx ame
+home same
+profile same 
+
+import { Link } from "react-router-dom";
+
+function NavBar() {
+  return (
+    <div>
+      
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+     
+    </div>
+  );
+}
+export default NavBar;
+here page is loaded again;
+======================================
+import {BrowserRouter,  Route ,Routes,Link} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+function App(){
+  return(
+    <BrowserRouter>
+      <NavBar />
+               <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+
+=
+function Error(){
+    return(
+        <div>
+            <h1>Error 404: Page Not Found</h1>
+            <p>Something went wrong</p>
+        </div>
+    )
+}
+export default Error;
+
+===========================================
+import {BrowserRouter,  Route ,Routes,Link,Navigate} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+function App(){
+  return(
+    <BrowserRouter>
+      <NavBar />
+               <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<Error />} />
+          <Route path="/home" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+
+=============================
+
+if we want to read name from url
+useParams
+
+import {BrowserRouter,  Route ,Routes,Link,Navigate} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+import User from './profile/User';
+function App(){
+  return(
+    <BrowserRouter>
+      <NavBar />
+               <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<Error />} />
+          <Route path="/home" element={<Navigate to="/" />} />
+          <Route path="/user/:username" element={<User />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App;
+
+import { useParams } from "react-router-dom";
+function User(){
+    const { username } = useParams();
+    return(
+        <div>
+            <h2>User component</h2>
+            <h1>Welcome: {username}</h1>
+            <p>This is the {username} component created to learn react routing</p>
+        </div>
+    );
+}
+export default User;
+
+====================================================
+import { useParams } from "react-router-dom";
+import User1 from "./User1";
+import User2 from "./User2";
+import User3 from "./User3";
+function User(){
+    const { username } = useParams();
+    return(
+        <div>
+                      {username=== "ram"?<User1/> :username==="shyam" ? <User2/> : username==="ajay"? <User3/>:<h2>guest Component:</h2>}
+        </div>
+    );
+}
+export default User;
+
+
+=========================================
+
+Navlink:
+
+import {BrowserRouter,  Route ,Routes,Link,Navigate,NavLink} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+import User from './profile/User';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav style={{ margin: '20px' }}>
+        <NavLink
+          to="/"
+          style={({ isActive }) => ({
+            marginRight: '15px',
+            color: isActive ? 'green' : 'blue',
+            fontWeight: isActive ? 'bold' : 'normal'
+          })}> Home </NavLink>
+        <NavLink
+          to="/profile"
+          style={({ isActive }) => ({
+            marginRight: '15px',
+            color: isActive ? 'green' : 'blue',
+            fontWeight: isActive ? 'bold' : 'normal'
+          })}
+        >
+          Profile
+        </NavLink>
+      </nav>
+
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/*" element={<Error />} />
+        <Route path="/home" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+In this app, **`<NavLink>`** is used to create navigation links that automatically apply custom styles (`green` color & `bold` font) when the link is active (i.e., matches the current URL).
+It helps visually indicate which page (Home or Profile) the user is currently on.
+
+
+
+==========================================
+import {BrowserRouter,  Route ,Routes,Link,Navigate,NavLink} from 'react-router-dom';
+import Profile from './component/Profile';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+import User from './profile/User';
+import './App.css';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav style={{ margin: '20px' }}>
+        {/* <NavLink
+          to="/"
+          style={({ isActive }) => ({
+            marginRight: '15px',
+            color: isActive ? 'green' : 'blue',
+            fontWeight: isActive ? 'bold' : 'normal'
+          })}> Home </NavLink>
+        <NavLink
+          to="/profile"
+          style={({ isActive }) => ({
+            marginRight: '15px',
+            color: isActive ? 'green' : 'blue',
+            fontWeight: isActive ? 'bold' : 'normal'
+          })}
+        >
+          Profile
+        </NavLink> */}
+      </nav>
+      <NavLink to='/' className={({ isActive }) => (isActive ? 'active-link link' : 'link')}>Home</NavLink>
+      <NavLink to='/profile' className={({ isActive }) => (isActive ? 'active-link link' : 'link')}>Profile</NavLink>
+
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/*" element={<Error />} />
+        <Route path="/home" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+app.css
+
+.link{
+  margin-right: 15px;
+  color: black;
+text-decoration: none;
+}
+.active-link{
+  color: blue;
+  text-decoration: underline;
+
+}
+
+======================
+Nested routes:
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+import User from './profile/User';
+import './App.css';
+import Dashboard from './nested/Dashboard';
+import Profile from './nested/Profile';
+import Setting from './nested/Setting';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+       
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="setting" element={<Setting />} />
+        </Route>
+
+        
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+import { Link,NavLink, Outlet } from "react-router-dom";
+
+function Dashboard() {
+  return (
+    <div>
+      <h2>Dashboard : </h2>
+      <nav>
+        <NavLink to="profile" className={({isActive})=>isActive? "active-link":"link"}>Profile</NavLink>
+        <NavLink to="setting" className={({isActive})=>isActive? "active-link":"link"}>Settings</NavLink>
+      </nav>
+      <hr></hr>
+      <Outlet />
+    </div>
+  );
+}
+
+export default Dashboard;
+
+function Profile() {
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <p> This is a profile component</p>
+    </div>
+  );
+}
+
+export default Profile;
+
+
+function Setting() {
+  return (
+    <div>
+      <h2>Settings Page</h2>
+      <p> This is a settings component page</p>
+    </div>
+  );
+}
+
+export default Setting;
+========================================
+
+SEARCH BAR: 
+searchParams
+
+
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './component/Home';
+import NavBar from './component/NavBar';
+import Error from './component/Error';
+import User from './profile/User';
+import './App.css';
+import Dashboard from './nested/Dashboard';
+import Profile from './nested/Profile';
+import Setting from './nested/Setting';
+import Product from './nested/Product';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+<Route path="product" element={<Product />} />
+       
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="setting" element={<Setting />} />
+          
+        </Route>
+
+        
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+
+import { useSearchParams } from "react-router-dom";
+
+function Product() {
+    const [searchParams,setSearchParams] = useSearchParams();
+    const category = searchParams.get("category");
+    const price = searchParams.get("price");
+    return (
+        <div>
+            <h2>Product Page</h2>
+            <p><strong>Category: {category}</strong></p>
+            <p><strong>Price: {price}</strong></p>
+        </div>
+    );
+}
+export default Product;
+
+=============================
+app.jsx same
+
+
+product.jsx
+import { useSearchParams } from "react-router-dom";
+
+function Product() {
+    const [searchParams,setSearchParams] = useSearchParams();
+    const category = searchParams.get("category");
+    const price = searchParams.get("price");
+    return (
+        <div>
+            <h2>Product Page</h2>
+            <p><strong>Category: {category}</strong></p>
+            <p><strong>Price: {price}</strong></p>
+            <hr></hr>
+            <button onClick={()=>setSearchParams({category:"DellLaptop",price:"90000"})}>Update category</button>
+            <button onClick={()=>setSearchParams({category:"HPLaptop",price:"70000"})}>Update price</button>
+        </div>
+    );
+}
+export default Product;
+
+http://localhost:5173/product?category=iPhone&price=100000
+next click update category and then update price
+
+
+
+
+
+
+
+
+
+http://localhost:5173/product?category=iPhone&price=100000
+====================================================================================
+Used <BrowserRouter>, <Routes>, <Route> for basic page routing.
+
+<Link> & <NavLink> for navigation; NavLink highlights active link.
+
+useParams() to read dynamic URL parts like /user/:username.
+
+Nested routes + <Outlet /> to render sub-pages like /dashboard/profile.
+
+useSearchParams() to read/update query params (e.g., ?category=...).  ==============>query filter
+
+<Navigate> for redirects & catch-all route for 404 error page.
+
+Moved styles to CSS for cleaner active link styling.
+
+========================================================================================
+
+
+
+ 
+
+
